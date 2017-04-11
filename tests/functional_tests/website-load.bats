@@ -24,13 +24,43 @@
 # see http://stackoverflow.com/questions/9561020/how-do-i-use-the-python-scrapy-module-to-list-all-the-urls-from-my-website
 
 @test "load Autolab-specific client-side js files" {
-	# check for userLogic.js
-	skip "TODO"
+	mkdir "$BATS_TMPDIR/js"
+	curl -s --ipv4 -k https://127.0.0.1:9000/js/userlogic.js -o "$BATS_TMPDIR/js/userlogic.js"
+	cmp "$BATS_TMPDIR/js/userlogic.js" data/autolab-start/js/userlogic.js
+	result=$?
+	rm -rf "$BATS_TMPDIR/js"
+	[ "$result" -eq 0 ]
 }
 
 @test "load third-party js libraries" {
 	# check for jquery.min.js, socket.io.js, materialize.min.js, Filesaver.js
-	skip "TODO"
+	mkdir "$BATS_TMPDIR/js"
+	curl -s --ipv4 -k https://127.0.0.1:9000/js/jquery.min.js -o "$BATS_TMPDIR/js/jquery.min.js"
+	cmp "$BATS_TMPDIR/js/jquery.min.js" data/autolab-start/js/jquery.min.js
+	result=$?
+	rm -rf "$BATS_TMPDIR/js"
+	[ "$result" -eq 0 ]
+
+	mkdir "$BATS_TMPDIR/js"
+	curl -s --ipv4 -k https://127.0.0.1:9000/socket.io/socket.io.js -o "$BATS_TMPDIR/js/socket.io.js"
+	cmp "$BATS_TMPDIR/js/socket.io.js" data/autolab-start/js/socket.io.js
+	result=$?
+	rm -rf "$BATS_TMPDIR/js"
+	[ "$result" -eq 0 ]
+
+	mkdir "$BATS_TMPDIR/js"
+	curl -s --ipv4 -k https://127.0.0.1:9000/js/materialize.min.js -o "$BATS_TMPDIR/js/materialize.min.js"
+	cmp "$BATS_TMPDIR/js/materialize.min.js" data/autolab-start/js/materialize.min.js
+	result=$?
+	rm -rf "$BATS_TMPDIR/js"
+	[ "$result" -eq 0 ]
+
+	mkdir "$BATS_TMPDIR/js"
+	curl -s --ipv4 -k https://127.0.0.1:9000/js/Filesaver.js -o "$BATS_TMPDIR/js/Filesaver.js"
+	cmp "$BATS_TMPDIR/js/Filesaver.js" data/autolab-start/js/Filesaver.js
+	result=$?
+	rm -rf "$BATS_TMPDIR/js"
+	[ "$result" -eq 0 ]
 }
 
 @test "load third-party css files" {
